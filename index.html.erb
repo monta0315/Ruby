@@ -1,0 +1,21 @@
+<body>
+  <div class="container">
+    <div class="top">
+      <h2>デバイス</h2>
+      <%= select_tag 'name',options_for_select({編集: 1,ダウンリンク設定: 2,データ出力: 3},1),include_blank: true %>
+    </div>
+    <div class="contents">
+      <strong><p>ID</p></strong>
+      <strong><p>ラベル</p></strong>
+      <strong><p>最終受信時刻</p></strong>
+        <% @devices.each do |d|%>
+          <div class="index">
+            <%= d.radio_button() %>
+            <%= d.device_id %>
+            <%= d.label %>
+            <%= d.updated_at %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</body>
