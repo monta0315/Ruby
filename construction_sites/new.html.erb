@@ -1,0 +1,49 @@
+<header>
+    <div class="head-container">
+        <div class="header-logo">
+           <h2>高精度版揺れウォッチャー</h2>
+        </div>
+         <div class="header-right">
+            <ul>
+                <li>
+                    <%= link_to "ログアウト",logout_path,method: :delete%>
+                </li>
+                 <li>
+                    <%= link_to "現場図",logout_path,method: :delete%>
+                </li>
+                <li>
+                    <%= link_to "デバイス",devices_path,method: :get%>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<%= form_with model: @construction_site do |f|%>
+<div class="wrapper">
+     <div class="new-container">
+        <h1>現場図を作成する</h1>
+        <div class="new-contents">
+            <div class="contents-half">
+                <div class="new-name">
+                    <p>現場名</p>
+                    <%= f.text_field :name%>
+                </div>
+                <div class="new-in">
+                    <p>画像</p>
+                    <%= f.file_field :portrait %>
+                </div>
+                <div class="new-btn">
+                        <li>
+                            <%= link_to(root_path) do %>
+                                <button>キャンセル</button>
+                            <% end %>
+                        </li>
+                        <li>
+                            <%= f.submit "現場図の作成"%>
+                        </li>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>

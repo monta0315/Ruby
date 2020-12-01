@@ -1,0 +1,132 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+h1{
+    margin: 0;
+}
+li{
+    list-style: none;
+}
+header{
+   height:70px;
+   background-color: rgb(14, 1, 1);
+}
+header ul{
+    padding-bottom: 10px;
+}
+
+.wrapper{
+    background-color: rgb(109, 106, 106);
+}
+.head-container{
+    width:1170px;
+    margin: 0 auto;
+    text-align: center;
+    color: azure;
+}
+.header-logo{
+    float: left;
+}
+.header-right{
+    float:right;
+    color: azure;
+}
+.header-right li{
+    float: right;
+    padding-right:20px;
+}
+.header-right a{
+    color:white;
+}
+//ここまでheader
+.new-container{
+    width: 800px;
+    height: 1000px;
+    margin: 0 auto;
+}
+.new-container h1{
+    padding-top:50px;
+    padding-bottom: 50px;
+    font-size: 24px;
+}
+.new-contents{
+    height:320px;
+    width: 800px;
+    background-color: #fff;
+    margin: 0 auto;
+}
+.contents-half{
+    width: 400px;
+    margin: left;
+    font-size:16px;
+    padding:30px;
+}
+.new-name input{
+    width: 250px;
+}
+.new-btn{
+    height: 150px;
+    width: 400px;
+}
+.new-btn li{
+    margin-top: 80px;
+    float:left;
+    padding-right: 20px;
+}
+.new-btn button{
+    padding:0 30px;
+}
+.new-btn input{
+    padding:0 30px;
+    background-color: rgb(63, 205, 230);
+    color: #fff;
+}
+//ここからshow
+.index-container{
+    width: 1170px;
+    height: 1080px;
+    margin: 0 auto;
+}
+.index-top{
+    height: 100px;
+}
+.index-top h1{
+    font-size: 24px;
+    float: left;
+}
+.index-top button{
+    float: right;
+    color: azure;
+    background-color: rgb(55, 185, 221);
+    padding: 5px 30px;
+    margin:20px;
+}
+.index-contents{
+    width: 1170px;
+    margin: 0 auto;
+    display:flex;
+    flex-wrap: wrap;
+}
+.index-card {
+    width: 350px;
+    height: 250px;
+    margin: 15px;
+    background-color: #fff;
+    border: 2px solid rgb(14, 13, 13);
+}
+.index-card img{
+    width: 350px;
+    height: 150px;
+    object-fit: cover;
+}
+.index-card p{
+    font-size: 16px;
+    color: rgb(78, 73, 73);
+    margin-left: 10px;
+}
+.index-card text{
+    font-size:18px;
+}

@@ -1,0 +1,87 @@
+<header>
+    <div class="head-container">
+        <div class="header-logo">
+           <h2>高精度版揺れウォッチャー</h2>
+        </div>
+         <div class="header-right">
+            <ul>
+                <li>
+                    <%= link_to "デバイス",devices_path,method: :get%>
+                </li>
+                 <li>
+                    <%= link_to "現場図",logout_path,method: :delete%>
+                </li>
+                <li>
+                    <%= link_to "LOGOUT",logout_path,method: :delete%>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="wrapper">
+    <div class="down-container">
+        <div class="comment">
+            <h1>ダウンリンク設定を編集する</h1>
+        </div>
+        <div class="down-contents">
+            <%= form_with url: "/devices/#{@device.id}/downlink/edit" do |f| %>
+                <%= f.label :ID %>
+                <%= f.text_field :device_id ,:value=>@device.device_id , :disabled=>true %>
+                <%= f.label :測定モード %>
+                <select name="measure" id="measure">
+                    <option value="">未定</option>
+                </select>
+                <%= f.label :動作開始時刻 %>
+                <select name="start_hour" id="start_hour">
+                </select>
+                <%= f.label :動作終了時刻 %>
+                <select name="end_hour" id="end_hour">
+                </select>
+                <%= f.label :送信間隔 %>
+                <select name="interval" id="interval">
+                </select>
+                <%= link_to(devices_path) do%>
+                    <button>キャンセル</button>
+                <% end %>
+                <%= f.submit "情報を更新する" %>
+            <% end %>
+            <script language="jacascript" type="text/javascript">
+                let start_hour =document.getElementById('start_hour');
+                document.createElement('option');
+                for(let i=0;i<=23;i++){
+                    let option=document.createElement('option');
+                    option.setAttribute('value',i);
+                    option.innerHTML=i+'時';
+                    if(<%= @downlink.start_hour%> ===i){
+                        option.setAttribute('selected',true);
+                    }
+                    start_hour.appendChild(option);
+                }
+                let end_hour =document.getElementById('end_hour');
+                document.createElement('option');
+                for(let i=0;i<=23;i++){
+                    let option=document.createElement('option');
+                    option.setAttribute('value',i);
+                    option.innerHTML=i+'時';
+                    if(<%= @downlink.end_hour%> ===i){
+                        option.setAttribute('selected',true);
+                    }
+                    end_hour.appendChild(option);
+                }
+                let interval=document.getElementById('interval');
+                document.createElement('option');
+                const span=["30秒","1分","3分","5分","10分","15分","30分"];
+                for(let i=0;i<span.length;i++){
+                    let option=document.createElement('option');
+                    option.setAttribute('value',i+1);
+                    option.innerHTML=span[i];
+                    if(<%= @downlink.interval%>===i+1){
+                        option.setAttribute('selected',true);
+                        console.log("ううううう");
+                    }
+                    interval.appendChild(option);
+                }
+            </script>
+        </div>
+    </div>
+</div>

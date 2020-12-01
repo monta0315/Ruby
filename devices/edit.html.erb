@@ -1,0 +1,37 @@
+<header>
+    <div class="head-container">
+        <div class="header-logo">
+           <h2>高精度版揺れウォッチャー</h2>
+        </div>
+         <div class="header-right">
+            <ul>
+                <li>
+                    <%= link_to "デバイス",devices_path,method: :get%>
+                </li>
+                 <li>
+                    <%= link_to "現場図",logout_path,method: :delete%>
+                </li>
+                <li>
+                    <%= link_to "LOGOUT",logout_path,method: :delete%>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="wrapper">
+    <div class="ed-container">
+        <h1>デバイスを編集する</h1>
+        <div class="ed-contents">
+            <%= form_with model: @devices do |f| %>
+                <%= f.label :ID %>
+                <%= f.text_field  :device_id ,:value=>@device.device_id %>
+                <%= f.label :ラベル %>
+                <%= f.text_field :label,:value=>@device.label%>
+                <%= link_to(devices_path) do%>
+                    <button>キャンセル</button>
+                <% end %>
+                <%= f.submit "情報を更新する" %>
+            <% end %>
+        </div>
+    </div>
+</div>

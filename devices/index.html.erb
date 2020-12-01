@@ -1,0 +1,70 @@
+<header>
+    <div class="head-container">
+        <div class="header-logo">
+           <h2>高精度版揺れウォッチャー</h2>
+        </div>
+         <div class="header-right">
+            <ul>
+                <li>
+                    <%= link_to "ログアウト",logout_path,method: :delete%>
+                </li>
+                <li>
+                    <%= link_to "デバイス",devices_path,method: :get%>
+                </li>
+                <li>
+                    <%= link_to "現場図",logout_path,method: :delete%>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="wrapper">
+    <div class="area">
+    </div>
+    <div class="de-container">
+        <div class="de-top">
+            <p><strong>デバイス</strong></p>
+            <select name="move" id="move" disabled=true>
+                <option>アクション</option>
+                <option value="2" id="edit">編集</option>
+                <option value="3" id="link">ダウンリンク設定</option>
+                <option value="4" id="output">出力</option>
+            </select>
+        </div>
+        <div class="de-index">
+            <div class="de-label">
+                <p>ID</p>
+                <p>ラベル</p>
+                <p>最終受信時刻</p>
+            </div>
+            <% @devices.each do |d| %>
+                <div class="de-set">
+                    <%= radio_button 'devices','ids',d.id%>
+                    <%= d.device_id %>
+                    <%= d.label %>
+                    <%= d.updated_at %>
+                </div>
+            <% end %>
+                <script language="javascript" type="text/javascript">
+                    var ids=document.getElementsByName("devices[ids]");
+                        for(var i=0; i<ids.length;i++){
+                            ids[i].addEventListener('change',function(event){
+                                var edit=document.getElementById("edit");
+                                edit.value="/devices/"+event.target.value+"/edit";
+                                var link=document.getElementById("link");
+                                link.value="/devices/"+event.target.value+"/downlink/edit";
+                                var output=document.getElementById("output");
+                                output.value="/devices/"+event.target.value+"/csv";
+
+                                var bool=document.getElementById("move");
+                                bool.disabled=false;
+                            },false);
+                        }
+                    const move=document.getElementById("move");
+                    move.onchange=function () {
+                        window.location.href=move.value;
+                    };
+                </script>
+        </div>
+    </div>
+</div>

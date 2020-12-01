@@ -1,0 +1,39 @@
+<header>
+    <div class="head-container">
+        <div class="header-logo">
+           <h2>高精度版揺れウォッチャー</h2>
+        </div>
+         <div class="header-right">
+            <ul>
+                <li>
+                    <%= link_to "ログアウト",logout_path,method: :delete%>
+                </li>
+                <li>
+                    <%= link_to "デバイス",devices_path,method: :get%>
+                </li>
+                <li>
+                    <%= link_to "現場図",logout_path,method: :delete%>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="wrapper">
+    <div class="index-container">
+        <div class="index-top">
+            <h1>現場図</h1>
+            <%= link_to("construction_sites/new") do%>
+                <button>新規作成</button>
+            <% end %>
+        </div>
+        <div class="index-contents">
+            <% @construction_sites.each do |c| %>
+                <div class="index-card">
+                    <%=image_tag c.portrait if c.portrait.attached? %>
+                    <p>現場名</p>
+                    <p><%= c.name%></p>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

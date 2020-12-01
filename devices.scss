@@ -1,0 +1,105 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+li{
+    list-style: none;
+}
+.wrapper{
+    background-color: rgb(203, 189, 189);
+}
+header{
+   height:70px;
+   background-color: rgb(14, 1, 1);
+}
+.head-container{
+    width:1170px;
+    height: 70px;
+    margin: 0 auto;
+    text-align: center;
+    color: azure;
+}
+.header-logo{
+    float: left;
+}
+.header-right{
+    float:right;
+    color: azure;
+}
+.header-right li{
+    float: right;
+    padding-right:20px;
+    vertical-align: middle;
+}
+.header-right a{
+    color:white;
+    text-decoration: none;
+}
+//ここまでheader
+.area{
+    height: 60px;
+}
+.de-container{
+    width: 1120px;
+    height: 720px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding-top: 10px;
+}
+
+.de-top p{
+    font-size: 24px;
+    padding: 10px 30px;
+    display: inline-block;
+    text-align: left;
+}
+.de-top select{
+    float: right;
+    margin-top: 40px;
+    margin-right:60px;
+    width: 120px;
+    height: 20px;
+}
+.de-set{
+    display: flex;
+}
+.de-label p{
+    display: inline-block;
+    justify-content: center;
+    font-size: 16px;
+}
+.de-label{
+    padding-left: 50px;
+}
+.de-set{
+    display: flex;
+    justify-content:center;
+}
+//ここまで/devices
+.ed-container{
+    width: 1170px;
+    height: 100%;
+    margin: 0 auto;
+}
+.ed-cotainer h1{
+    display: flex;
+    padding-top: 50px;
+    font-size:24px;
+}
+.ed-contents{
+    background-color: #fff;
+    width: 800px;
+    height:380px;
+    margin-left:30px;
+}
+.down-container{
+    width: 1170px;
+    height:1080px;
+    margin: 0 auto;
+}
+.comment{
+    height: 150px;
+    width: 100%;
+}
