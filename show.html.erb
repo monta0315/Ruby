@@ -1,0 +1,95 @@
+<div id="map"></div>
+<div class="modal" id="modal">
+    <div class="inner" id="inner">
+        <%= form_with url:"#{@construction_site.id}",method: :post do |f| %>
+            <p><%= f.label :name,"デバイスIDの選択" %></p>
+            <p><%= f.label :name,"IDを選択する" %></p>
+            <select name="device_id" id="device_id">
+                <% @devices.each do |d| %>
+                    <option><%= d.device_id %></option>
+                <% end %>
+            </select>
+            <%= f.hidden_field :x%>
+            <%= f.hidden_field :y%>
+            <%= f.submit :追加,:id=>"btn1"%>
+        <% end %>
+    </div>
+    <div class="black-background" id="black-bg"></div>
+</div>
+<script language="javascript" type="text/javascript">
+    var map = L.map("map", {
+    crs: L.CRS.Simple,
+    contextmenu:true,
+    contextmenuWidth:180,
+    contextmenuItems:[{
+        text:"この地点にマーカーを追加",
+        callback:addMarker
+        }
+    ]
+    });
+    var bounds = [[0,0], [1000,1000]];
+    var image = L.imageOverlay("<%=url_for(@construction_site.portrait)%>", bounds).addTo(map);
+    map.fitBounds(bounds);
+    //データベースに格納したmarkerをしゅつりょくする
+    // for(var j=0;j< (<%= @markers.size%>);j++){
+    //     var circle=L.circleMarker([gon.markers[j].x,gon.markers[j].y],{radius: 25,fillColor: "#fff",stroke: false,fill: true,fillOpacity: 0.6}).addTo(map);
+    //      var popup=L.popup({minWidth:200})
+    //                 .setLatLng([gon.markers[j].x,gon.markers[j].y])
+    //                 .setContent(`<div class="top"><p>デバイスID</p><p><% @markers[0]&.device&.device_id%>
+    //                 </p></div>`+`<div class="middle"><span class="dB">${gon.freq_10}
+    //                 </span>dB</div>`+`<div class="bottom"><a href="/devices/${gon.markers[j].device_id}" class="btn">詳細データ</a></div>`)
+    //                 .openOn(map);
+    //     circle.bindPopup(popup).openPopup();
+
+    // }
+    var popup
+    <% @markers.each do |marker| %>
+    popup = L.popup({ minWidth: 200 })
+                     .setLatLng([<%= marker.x %>, <%= marker.y %>])
+                     .setContent(`<div class="top"><p>デバイスID</p><p><%= marker.device.device_id %>
+                        </p></div><div class="middle"><span class="dB"><%= marker.device.latest_uplink ? marker.device.latest_uplink.freq_10 : 0 %></span>dB</div><div class="bottom"><a href="/devices/<%= marker.device.id %>" class="btn">詳細データ</a></div>`)
+
+            L.circleMarker([<%= marker.x %>, <%= marker.y %>], { radius: 25, fillColor: "<%= marker.color_code %>", stroke: false, fill: true, fillOpacity: 0.6}).addTo(map).bindPopup(popup);
+            var numberIcon=L.divIcon({className: "div-icon",html:`<p><%= marker.device.latest_uplink ? marker.device.latest_uplink.freq_10 : 0 %></p>`,iconSize:0});
+        var marker =  L.marker([<%= marker.x %>, <%= marker.y %>],{icon: numberIcon}).addTo(map);
+    <% end %>
+
+    var modal = document.getElementById("modal");
+    var blackBg = document.getElementById("black-bg");
+    var inner = document.getElementById("inner");
+    var btn=document.getElementById("btn1");
+    //マーカーの座標を格納する変数
+    var lat,lng;
+
+    function addMarker(e) {
+        //modalのONに切り替える
+        if(!modal) return;
+        modal.classList.add("is-show");
+        //inner内のinputがクリックされたらそこにピンを打つようにしたい
+        lat=e.latlng.lat;
+        lng=e.latlng.lng;
+    }
+
+
+    btn.addEventListener("click",function(){
+        //クリックした場所にマーカーを追加
+        //マーカを立てた場所の最新の座標を格納し隠しているformに投げる
+        var x=document.getElementById("x");
+        var y=document.getElementById("y");
+        x.value=lat;
+        y.value=lng;
+    });
+    //modalの背景、インナー内がクリックされた際にモダールをOFF
+    blackBg.addEventListener("click",function(){
+        modal.classList.toggle("is-show");
+    });
+    btn.addEventListener("click",function () {
+        modal.classList.toggle("is-show");
+    })
+
+    var helloPopup = L.popup().setContent("Hello World!");
+
+    L.easyButton("fas fa-cog", function(btn, map){
+        window.location.href = "<%= edit_construction_site_path(params[:id]) %>"
+    }).addTo(map);
+</script>
